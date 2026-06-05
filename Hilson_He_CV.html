@@ -4,12 +4,50 @@
 <meta charset="UTF-8" />
 <title>Hilson He - Student Profile CV</title>
 <style>
-@page { size: A4; margin: 11mm; }
+@page { size: A4; margin: 0; }
 :root{
   --ink:#18263b; --muted:#5e6d82; --line:#dbe8f7; --blue:#2563eb; --blue2:#eff6ff;
   --green:#15935d; --green2:#ecfdf5; --orange:#d97706; --orange2:#fff7ed;
   --purple:#7c3aed; --purple2:#f5f3ff; --pink:#db2777; --pink2:#fdf2f8;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f3f4f6;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  margin: 0 auto;
+  padding: 5mm;
+  background: white;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    background: white;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    margin: 0;
+    padding: 5mm;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
+
 *{box-sizing:border-box}
 body{margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink); font-size:10.2pt; line-height:1.32; background:white;}
 a{color:var(--blue); text-decoration:none; font-weight:700;}
@@ -24,8 +62,7 @@ h1{font-size:29pt; line-height:1; margin:0; color:#102a56; letter-spacing:.2px;}
   display:flex;
   align-items:center;
   gap:0px;
-  width:60%;
-  margin: top 0px;
+  width:83%;
   padding:0px 5px;
   background:white;
   border:1.4px solid #bfd3f3;
@@ -33,6 +70,8 @@ h1{font-size:29pt; line-height:1; margin:0; color:#102a56; letter-spacing:.2px;}
   font-weight:900;
   color:#233b63;
   box-shadow:0 2px 6px rgba(37,99,235,0.08);
+  overflow:hidden;
+  white-space:nowrap;
 }
 .school img{
   height:60px;
@@ -42,8 +81,11 @@ h1{font-size:29pt; line-height:1; margin:0; color:#102a56; letter-spacing:.2px;}
   flex:none;
 }
 .school span{
-  font-size:10pt;
+  font-size:9pt;
   line-height:1.15;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .logo-text{font-weight:900; color:#12315f;}
 /* Student portrait box: keeps the photo from becoming too large */
@@ -75,12 +117,21 @@ h1{font-size:29pt; line-height:1; margin:0; color:#102a56; letter-spacing:.2px;}
 .sec-head{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
 .icon{width:30px; height:30px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; flex:none;}
 .i-acad{background:var(--blue2)} .i-art{background:var(--purple2)} .i-sport{background:var(--green2)} .i-char{background:var(--orange2)}
-.sec-title{font-size:12.4pt; font-weight:900; color:#12253f;}
+.sec-title{font-size:10.4pt; font-weight:900; color:#12253f;}
 .tag{margin-left:auto; border-radius:999px; padding:3px 7px; font-size:7.8pt; font-weight:900;}
 .t-acad{background:var(--blue2); color:var(--blue)} .t-art{background:var(--purple2); color:var(--purple)} .t-sport{background:var(--green2); color:var(--green)} .t-char{background:var(--orange2); color:var(--orange)}
 .entry{padding-bottom:7px; margin-bottom:7px; border-bottom:1px dashed #e5edf8;}
 .entry:last-child{border-bottom:none; padding-bottom:0; margin-bottom:0;}
-.title{font-weight:900; color:#16273e;}
+.title{font-weight:900; font-size:9pt; color:#16273e;}
+/* Toggle descriptions by changing body class:
+   <body class="show-desc"> shows all descriptions
+   <body class="hide-desc"> hides regular descriptions for a compact one-page CV */
+body.hide-desc .entry > .desc{display:none;}
+body.hide-desc .entry > .desc.keep-desc{display:block;}
+body.show-desc .entry > .desc{display:block;}
+
+body.hide-desc .entry{padding-bottom:5px; margin-bottom:5px;}
+body.hide-desc .evidence{font-size:8.2pt; margin-top:2px;}
 .desc{color:#4b5a70; margin-top:2px;}
 .evidence{font-size:8.6pt; color:#6a7a8e; margin-top:3px;}
 .placeholder{color:#a05208; font-weight:900;}
@@ -91,6 +142,9 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
   grid-template-columns:repeat(3,1fr);
   gap:6px;
   margin-top:5px;
+}
+.stat-grid-2{
+  grid-template-columns:repeat(2,1fr);
 }
 
 .stat-box{
@@ -111,7 +165,7 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
 
 .stat-box b{
   display:block;
-  font-size:12pt;
+  font-size:10pt;
   color:#2563eb;
   line-height:1.1;
 }
@@ -137,7 +191,7 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
 .art-mini{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:7px;}
 
 .artbox{
-  height:35mm;
+  height:20mm;
   border:1.4px dashed #d6c8ff;
   border-radius:11px;
   display:flex;
@@ -171,6 +225,15 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
   border-radius:8px;
 }
 
+.qualities-section{
+  font-size:9pt;
+}
+
+.qualities-section li{
+  margin:3px 0;
+  line-height:1.22;
+}
+
 .basket-media{display:grid; grid-template-columns:22mm 1fr; gap:8px; align-items:center; margin-top:7px; padding-top:7px; border-top:1px dashed #e5edf8;}
 .basket-media img{width:22mm; height:16mm; object-fit:cover; border:1px solid #d8e5f6; border-radius:10px; display:block;}
 .sport-subtitle{
@@ -186,7 +249,7 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
 .media-title{font-weight:900; color:#16273e; font-size:9pt;}
 </style>
 </head>
-<body>
+<body class="hide-desc">
 <div class="page">
   <div class="header">
     <div>
@@ -238,7 +301,7 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
   </div>
 
   <div class="entry">
-    <div class="title">2023 - Hope Cup Mathematics Competition - Bronze Award</div>
+    <div class="title">2023 - Hope Cup Competition - Bronze Award</div>
     <div class="desc">Received a Hope Cup award, reflecting early interest and achievement in mathematical problem-solving.</div>
     <div class="evidence">Evidence: <a href="https://raw.githubusercontent.com/ShengfengHe/Hilson-CV/main/certificates/hope_cup_2023.jpg">certificate</a></div>
   </div>
@@ -246,33 +309,28 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
   <div class="subsection-title">School Learning Record</div>
 
   <div class="entry">
-    <div class="desc">
-      <div class="stat-grid">
-        <div class="stat-box">
-          <em>Grade 4 · Term 2 · 2025–2026</em>
-          <b>6 / 10</b>
-          <span>subjects with Exemplary attainment</span>
-        </div>
-        <div class="stat-box">
-          <em>Grade 4 · Term 2 · 2025–2026</em>
-          <b>14</b>
-          <span>total Exemplary ratings across effort, attainment, and conduct</span>
-        </div>
-        <div class="stat-box">
-          <em>Teacher comment</em>
-          <b>Standout student</b>
-          <span>praised for intelligence, kindness, calmness, politeness, focus, and commitment to learning</span>
-        </div>
+  <div class="desc keep-desc">
+    <div class="stat-grid stat-grid-2">
+      <div class="stat-box">
+        <em>Grade 4 · Term 2 · 2025–2026</em>
+        <b>6 subjects</b>
+        <span>with Exemplary attainment, including Mathematics, English, Topic, Drama, PE & Health, and Science</span>
+      </div>
+      <div class="stat-box">
+        <em>Teacher comment</em>
+        <b>Standout student</b>
+        <span>praised for intelligence, kindness, calmness, politeness, focus, and commitment to learning</span>
       </div>
     </div>
   </div>
+</div>
 </div>
 
     <div class="section">
       <div class="sec-head"><div class="icon i-art">🎨</div><div class="sec-title">Drawing & Visual Arts</div><div class="tag t-art">Creativity</div></div>
       <div class="artsection-title">Drawing Awards</div>
       <div class="entry">
-        <div class="title">International Art Award, China-Russia - Belt and Road Theme</div>
+        <div class="title">International Art Award - Belt and Road Theme</div>
         <div class="desc">Received recognition in an international drawing competition hosted in China and Russia. <span class="placeholder"></span></div>
         <div class="evidence">Evidence: <a href="https://raw.githubusercontent.com/ShengfengHe/Hilson-CV/main/painting/beltroad2.jpg">certificate</a></div>
       </div>
@@ -287,7 +345,7 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
         <div class="evidence">Evidence: <a href="https://raw.githubusercontent.com/ShengfengHe/Hilson-CV/main/painting/FOBISIA_Hidden_worlds_painting.jpg"> painting</a> / <a href="https://raw.githubusercontent.com/ShengfengHe/Hilson-CV/main/painting/FOBISIA_Hidden_worlds.jpg"> certificate</a></div>
       </div>
       <div class="artsection-title">Selected Artwork Examples</div>
-      <div class="entry"><div class="title">Creative interests</div><div class="desc">Enjoys character design, imaginative scenes, and visual storytelling. Shows patience, attention to detail, and willingness to revise work.</div></div>
+      <div class="entry"><div class="desc">Enjoys character design, imaginative scenes, and visual storytelling. Shows patience, attention to detail, and willingness to revise work.</div></div>
       <div class="art-mini">
   <div class="artbox"><img src="painting/cartoon1.jpg" alt="artwork1" /></div>
   <div class="artbox"><img src="painting/drawing1.jpg" alt="artwork2" /></div>
@@ -340,16 +398,20 @@ ul{margin:0; padding-left:18px;} li{margin:5px 0;}
       </div>
     </div>
 
-    <div class="section">
-      <div class="sec-head"><div class="icon i-char">🌱</div><div class="sec-title">Character & Personal Qualities</div><div class="tag t-char">Growth</div></div>
-      <ul>
-        <li><b>Curious learner:</b> enjoys mathematical challenges and thoughtful problem-solving.</li>
-        <li><b>Creative:</b> expresses ideas through drawing and visual imagination.</li>
-        <li><b>Team-oriented:</b> learns cooperation, communication, and resilience through basketball.</li>
-        <li><b>Responsible:</b> developing independent reading and school-work habits.</li>
-        <li><b>Reflective:</b> responds well to encouragement and feedback with a desire to improve.</li>
-      </ul>
-    </div>
+    <div class="section qualities-section">
+  <div class="sec-head">
+    <div class="icon i-char">🌱</div>
+    <div class="sec-title">Personal Qualities</div>
+    <div class="tag t-char">Growth</div>
+  </div>
+  <ul>
+    <li><b>Curious learner:</b> enjoys mathematical challenges and thoughtful problem-solving.</li>
+    <li><b>Creative:</b> expresses ideas through drawing and visual imagination.</li>
+    <li><b>Team-oriented:</b> learns cooperation, communication, and resilience through basketball.</li>
+    <li><b>Responsible:</b> developing independent reading and school-work habits.</li>
+    <li><b>Reflective:</b> responds well to encouragement and feedback with a desire to improve.</li>
+  </ul>
+</div>
   </div>
 </div>
 </body>
